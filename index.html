@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090e17"><meta name="description" content="لوحة متابعة أسعار الذهب في مصر بالأسعار الحقيقية وتاريخ التغيرات">
+  <title>ذهب مصر | متابعة أسعار الذهب</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-icon">✦</div><div><span class="eyebrow">GOLD MARKET MONITOR</span><h1>ذهب <span>مصر</span></h1></div></div>
+      <div class="top-actions"><div class="market-status" id="connection"><span class="status-dot"></span><span id="status-text">جارِ تحميل البيانات</span></div><button class="btn" id="export-btn" title="تصدير سجل الأسعار">↓ <span>تصدير CSV</span></button><button class="btn primary" id="refresh-btn"><span id="refresh-symbol">↻</span> تحديث الآن</button></div>
+    </header>
+    <section class="hero"><div><div class="eyebrow gold">لوحة متابعة السوق المصري <span class="tiny-line"></span> أسعار الجرام بالجنيه</div><h2>أسعار الذهب في مصر <span class="gold-text">لحظة بلحظة</span></h2><p>متابعة الأسعار واتجاهات التغير اعتمادًا على قراءات حقيقية محفوظة من المصدر.</p></div><div class="update-panel"><div class="update-icon">◷</div><div><span>آخر جلب ناجح</span><strong id="last-fetch">لم تُسجل قراءة بعد</strong><small id="source-time">وقت المصدر: —</small></div></div></section>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+    <section class="stats-grid" id="cards" aria-label="أسعار الأعيرة"><div class="loading-card">جارِ البحث عن آخر الأسعار الحقيقية...</div></section>
+    <div class="dashboard-grid">
+      <section class="panel chart-panel"><div class="panel-head"><div><div class="eyebrow">PRICE HISTORY</div><h3>حركة أسعار الذهب</h3><p class="muted">القراءات المسجلة منذ بدء تشغيل النظام</p></div><div class="chart-actions"><select id="karat-select" aria-label="العيار"><option value="21">عيار 21</option><option value="24">عيار 24</option><option value="18">عيار 18</option><option value="14">عيار 14</option></select><div class="range-tabs" id="range-tabs"><button data-range="day">اليوم</button><button data-range="7d" class="selected">7 أيام</button><button data-range="30d">30 يوم</button><button data-range="all">الكل</button></div></div></div><div class="chart-wrap"><canvas id="price-chart" aria-label="رسم حركة أسعار الذهب" role="img"></canvas><div id="chart-empty" class="empty-chart" hidden>لا توجد قراءات كافية لعرض حركة السعر. يبدأ الرسم بعد تسجيل قراءتين حقيقيتين مختلفتين في الوقت.</div></div><div class="chart-foot"><span><i class="legend-dot"></i> السعر المسجل (ج.م/جرام)</span><span id="chart-count">0 قراءة</span></div></section>
+      <aside class="panel insight-panel"><div class="eyebrow">MARKET SNAPSHOT</div><h3>ملخص السوق</h3><div class="insight-highlight"><span>عيار 21 الآن</span><strong id="spot21">—</strong><small>جنيه مصري / جرام</small><div id="spot21-change" class="neutral">لا توجد مقارنة بعد</div></div><div class="mini-stat"><span>أعلى سعر مسجل للعيار المختار</span><strong id="high">—</strong></div><div class="mini-stat"><span>أقل سعر مسجل للعيار المختار</span><strong id="low">—</strong></div><div class="mini-stat"><span>عدد القراءات في الفترة</span><strong id="count">—</strong></div><div class="source-pill">◉ المصدر: <a href="https://foudalens.com/ar/rates/gold" target="_blank" rel="noopener noreferrer">FoudaLens ↗</a></div></aside>
+    </div>
+    <section class="panel table-panel"><div class="panel-head"><div><div class="eyebrow">DETAILED PRICES</div><h3>تفاصيل الأسعار والتغيرات</h3></div><span class="muted small">المقارنة بين آخر قراءتين مختلفتين في التوقيت</span></div><div class="table-scroll"><table><thead><tr><th>العيار</th><th>السعر الحالي</th><th>السعر السابق</th><th>التغير بالجنيه</th><th>التغير %</th><th>الاتجاه</th></tr></thead><tbody id="prices-table"><tr><td colspan="6" class="muted">لم تصل بيانات حقيقية بعد</td></tr></tbody></table></div></section>
+    <section class="panel history-panel"><div class="panel-head"><div><div class="eyebrow">RECENT UPDATES</div><h3>آخر القراءات المسجلة</h3></div><span class="muted small">آخر 10 قراءات</span></div><div class="table-scroll"><table><thead><tr><th>وقت القراءة</th><th>عيار 24</th><th>عيار 21</th><th>عيار 18</th><th>عيار 14</th></tr></thead><tbody id="history-table"><tr><td colspan="5" class="muted">لا يوجد سجل بعد</td></tr></tbody></table></div></section>
+    <footer><span>الأسعار استرشادية وقد تختلف عن أسعار المحلات والمصنعية. لا تمثل نصيحة استثمارية.</span><strong>By Dr. Mohammed Ammar</strong></footer>
+  </div>
+</body>
+</html>

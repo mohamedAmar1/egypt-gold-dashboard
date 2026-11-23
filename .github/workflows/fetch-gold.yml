@@ -34,6 +34,16 @@ jobs:
 
       - name: Fetch verified prices
         run: python scripts/fetch_gold.py
+        
+      - name: Upload scraper diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraper-debug
+          path: data/scraper-debug.txt
+          if-no-files-found: warn
+          retention-days: 3
+
 
       - name: Commit updated data
         run: |

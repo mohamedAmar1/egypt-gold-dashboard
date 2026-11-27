@@ -1,5 +1,17 @@
 {
   "source": "https://foudalens.com/ar/rates/gold",
-  "updated_at": null,
-  "records": []
+  "updated_at": "2026-11-27T03:59:52Z",
+  "records": [
+    {
+      "timestamp": "2026-11-27T03:59:52Z",
+      "fetched_at": "2026-11-27T03:59:52Z",
+      "source_updated_at": null,
+      "prices": {
+        "24": 6451.0,
+        "21": 5644.0,
+        "18": 4838.0,
+        "14": 3763.0
+      }
+    }
+  ]
 }
